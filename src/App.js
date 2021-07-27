@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import MessagePage from './pages/message';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './pages/home';
+import Dashboard from './components/Dashboard';
+import { useState } from 'react';
+import Landing from './components/Landing';
 
 function App() {
+  const [user, setUser] = useState(false);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setUser(true);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Router basename={process.env.PUBLIC_URL}>
+        <Switch>
+          <Route path='/' exact render={props => <Landing {...props} user={user.toString()} handleLogin={handleLogin} />}/>
+          <Route path='/message' component={MessagePage} exact />
+          <Route exact path='/dashboard' component={Dashboard} />
+        </Switch>
+      </Router>
     </div>
   );
 }
