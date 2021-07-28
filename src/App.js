@@ -13,13 +13,27 @@ function App() {
     e.preventDefault();
     setUser(true);
   };
+  const handleLogout = (e) => {
+    e.preventDefault();
+    setUser(false);
+  };
   return (
     <div className='App'>
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
-          <Route path='/' exact render={props => <Landing {...props} user={user.toString()} handleLogin={handleLogin} />}/>
+          <Route
+            path='/'
+            exact
+            render={(props) => (
+              <Landing
+                {...props}
+                user={user.toString()}
+                handleLogin={handleLogin}
+              />
+            )}
+          />
           <Route path='/message' component={MessagePage} exact />
-          <Route exact path='/dashboard' component={Dashboard} />
+          <Route exact path='/dashboard' component={Dashboard} handleLogout={handleLogout}/>
         </Switch>
       </Router>
     </div>
