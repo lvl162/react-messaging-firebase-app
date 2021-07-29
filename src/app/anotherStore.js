@@ -11,7 +11,9 @@ import { firebaseReducer } from 'react-redux-firebase';
 import { createFirestoreInstance, firestoreReducer } from 'redux-firestore'; // <- needed if using firestore
 import { configureStore } from '@reduxjs/toolkit';
 import { constants as rfConstants } from 'redux-firestore';
-
+import counterReducer from '../features/counter/counterSlice';
+import authReducer from '../features/auth/authSlice';
+import postsReducer from '../features/posts/postsSlice';
 const fbConfig = {
   apiKey: 'AIzaSyAerLgcmu810-sjB2Jt9tbuWOGPNox5Jkc',
   authDomain: 'messaging-app-ad213.firebaseapp.com',
@@ -24,7 +26,22 @@ const fbConfig = {
 
 const rrfConfig = {
   userProfile: 'users',
-  useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
+  profileParamsToPopulate: ['contacts:users', { child: 'role', root: 'roles' }],
+  useFirestoreForProfile: true,
+  profileFactory: (user) => {
+    console.log(user);
+    const profile = {
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      email: user.email,
+      role: ['user'],
+    };
+    if (user.providerData && user.providerData.length) {
+      profile.providerData = user.providerData;
+    }
+    return profile;
+  },
+  // Firestore for Profile instead of Realtime DB
   enableClaims: true, // Get custom claims along with the profile
   presence: 'presence', // where list of online users is stored in database
   sessions: 'sessions',
@@ -43,6 +60,9 @@ firebase.firestore(); // <- needed if using firestore
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer, // <- needed if using firestore
+  counter: counterReducer,
+  auth: authReducer,
+  posts: postsReducer,
 });
 
 // const store = createStore(rootReducer, initialState);

@@ -3,7 +3,7 @@ import { auth, googleAuthProvider } from '../../lib/firebase';
 
 // auth.onAuthStateChanged((user) => {
 //   if (user) {
-//     console.log('im in');
+//     console.log(user.uid);
 //   } else console.log('im out');
 // });
 

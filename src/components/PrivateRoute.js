@@ -2,10 +2,10 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
+import Loading from './Loading';
 
 function PrivateRoute({ children, ...rest }) {
   const auth = useSelector((state) => state.firebase.auth);
-  console.log(auth);
   return (
     <Route
       {...rest}
@@ -21,7 +21,7 @@ function PrivateRoute({ children, ...rest }) {
         //   />
         // )
         !isLoaded(auth) ? (
-          <span>Loading...</span>
+          <Loading />
         ) : isEmpty(auth) ? (
           // <GoogleButton/> button can be used instead
           <Redirect

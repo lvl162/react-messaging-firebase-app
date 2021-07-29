@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useFirebase, isLoaded, isEmpty } from 'react-redux-firebase';
+import { Redirect } from 'react-router-dom';
 // import GoogleButton from 'react-google-button' // optional
 
 function LoginPage() {
@@ -20,7 +21,7 @@ function LoginPage() {
         // <GoogleButton/> button can be used instead
         <button onClick={loginWithGoogle}>Login With Google</button>
       ) : (
-        <pre>{JSON.stringify(auth, null, 2)}</pre>
+        <Redirect to='/protected' />
       )}
     </div>
   );

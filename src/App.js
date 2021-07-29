@@ -4,10 +4,21 @@
 import { Provider, useSelector } from 'react-redux';
 import { isLoaded, ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import PrivateRoute from './components/PrivateRoute';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import Login from './components/Login';
 import LoginPage from './components/LoginPage';
 import { rrfProps, store } from './app/anotherStore';
+import Custom404 from './pages/404/404';
+import PostsList from './features/posts/postsList';
+import Loading from './components/Loading';
+import CreateTodo from './components/CreateTodo';
+import AllContacts from './components/AllContacts';
+import MessagePage from './pages/message';
 
 // import MessagePage from './pages/message';
 
@@ -55,10 +66,14 @@ import { rrfProps, store } from './app/anotherStore';
 
 function AuthIsLoaded({ children }) {
   const auth = useSelector((state) => state.firebase.auth);
-  if (!isLoaded(auth)) return <div>splash screen...</div>;
+  if (!isLoaded(auth)) return <Loading />;
   return children;
 }
 
+function SomeComponent() {
+  const profile = useSelector((state) => state.firebase.profile);
+  return <div>{JSON.stringify(profile, null, 2)}</div>;
+}
 const App = () => {
   return (
     <Provider store={store}>
@@ -67,14 +82,32 @@ const App = () => {
           <Switch>
             <Route exact path='/'>
               {/* {user ? <PostsList /> : <Login />} */}
-              <AuthIsLoaded children={<LoginPage />} />
+              <AuthIsLoaded
+                children={
+                  <>
+                    <LoginPage />
+                    <PostsList />
+                  </>
+                }
+              />
             </Route>
             <Route exact path='/login'>
               <LoginPage />
             </Route>
             <PrivateRoute exact path='/protected'>
-              <div>Protected content</div>
+              <PostsList />
+              <SomeComponent />
+              <CreateTodo />
+              <AllContacts />
             </PrivateRoute>
+            <PrivateRoute exact path='/message'>
+              <MessagePage></MessagePage>
+            </PrivateRoute>
+            <PrivateRoute exact path='/message/t/:to'>
+              <MessagePage></MessagePage>
+            </PrivateRoute>
+            <Route path='/404' component={Custom404} />
+            <Redirect to='/404' />
           </Switch>
         </Router>
       </ReactReduxFirebaseProvider>
