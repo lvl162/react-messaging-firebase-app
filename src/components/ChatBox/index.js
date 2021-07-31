@@ -16,7 +16,6 @@ import {
   SendButtonWrapper,
   ChatInputContainer,
 } from './ChatBoxElements';
-
 const ChatMessageItemWrapper = (props) => {
   const { me, message } = props;
   return (
@@ -42,7 +41,7 @@ const ChatAreaWrapper = () => {
   const scrollToBottom = () => {
     bottomRef.current.scrollIntoView({
       behavior: 'smooth',
-      block: 'end',
+      block: 'start',
     });
   };
   const ref = firestore.collection('messages');
@@ -54,15 +53,13 @@ const ChatAreaWrapper = () => {
     scrollToBottom();
   }, [messages]);
   return (
-    <>
-      <ChatArea>
-        {messages &&
-          messages.map((m) => (
-            <ChatMessageItemWrapper me={m.me} message={m.message} />
-          ))}
-        <div ref={bottomRef} className='list-bottom'></div>
-      </ChatArea>
-    </>
+    <ChatArea>
+      {messages &&
+        messages.map((m) => (
+          <ChatMessageItemWrapper me={m.me} message={m.message} />
+        ))}
+      <div ref={bottomRef} className='list-bottom'></div>
+    </ChatArea>
   );
 };
 
@@ -70,14 +67,16 @@ const ChatInputWrapper = (props) => {
   const [input, setInput] = useState('');
   const handleSendMessage = async (e) => {
     e.preventDefault();
+    console.log('send message click');
     if (input !== '') {
-      await firestore.collection('messages').add({
+      const res = await firestore.collection('messages').add({
         name: 'Tokyo',
         message: input,
         createdAt: serverTimestamp(),
       });
 
       setInput('');
+      console.log('Added document with ID: ', res.id);
     }
 
     // Tip: give all fields a default value here
@@ -93,10 +92,12 @@ const ChatInputWrapper = (props) => {
         onChange={(e) => setInput(e.target.value)}
         placeholder='Send a message'
       ></ChatInput>
-      <SendButtonWrapper type='submit' onClick={handleSendMessage}>
-        <SendButton></SendButton>
-        <span>Send</span>
-      </SendButtonWrapper>
+      <form onSubmit={handleSendMessage}>
+        <SendButtonWrapper type='submit'>
+          <SendButton></SendButton>
+          <span>Send</span>
+        </SendButtonWrapper>
+      </form>
     </ChatInputContainer>
   );
 };
@@ -116,7 +117,12 @@ const ChatBox = () => {
             <h1>3</h1>
           </ListIconsOption>
         </HeaderContainer>
-        <ChatAreaWrapper />
+        <ChatAreaWrapper
+          messages={[
+            { me: true, message: 'TEST ESTSTESTST' },
+            { me: false, message: 'TEST ESTSTESTST' },
+          ]}
+        />
         <ChatInputWrapper />
       </ChatBoxWrapper>
     </ChatBoxContainer>

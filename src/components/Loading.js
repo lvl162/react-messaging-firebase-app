@@ -1,10 +1,11 @@
 import React from 'react';
-import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react';
+// import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react';
 
 const Loading = () => {
   return (
     <div className='loading'>
-      <Segment>
+      Loading
+      {/* <Segment>
         <Dimmer active>
           <Loader size='massive'>Loading</Loader>
         </Dimmer>
@@ -20,7 +21,7 @@ const Loading = () => {
         <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
         <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
         <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
-      </Segment>
+      </Segment> */}
     </div>
   );
 };
