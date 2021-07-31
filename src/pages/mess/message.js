@@ -4,11 +4,9 @@ import ChatNav from '../components/ChatNav';
 
 const MessagePage = () => {
   return (
-    <div>
-      <div className='message-container'>
-        <ChatNav />
-        <ChatBox />
-      </div>
+    <div className='message-container'>
+      <ChatNav />
+      <ChatBox />
     </div>
   );
 };

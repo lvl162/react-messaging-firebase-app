@@ -80,4 +80,3 @@ export const ListOptions = styled.div`
   justify-content: left;
   color: #fff;
 `;
-

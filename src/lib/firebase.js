@@ -34,7 +34,7 @@ export const getUserWithUsername = async (username) => {
   return userDoc;
 };
 export const { serverTimestamp } = firebase.firestore.FieldValue;
-export const postToJson = (doc) => {
+export const docToJson = (doc) => {
   const data = doc.data();
   return {
     ...data,

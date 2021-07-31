@@ -3,7 +3,7 @@ import { IoMdSend } from 'react-icons/io';
 
 export const ChatBoxContainer = styled.div`
   flex-grow: 1;
-  background-color: yellowgreen;
+  background-color: blueviolet;
   /* margin-left: -20px; */
 `;
 
@@ -83,8 +83,7 @@ export const SendButtonWrapper = styled.button`
   display: flex;
   justify-content: flex-start;
   cursor: pointer;
-  font-size: 1.7rem;
-  overflow: hidden;
+  font-size: 1.8rem;
 `;
 export const SendButton = styled(IoMdSend)`
   cursor: pointer;
