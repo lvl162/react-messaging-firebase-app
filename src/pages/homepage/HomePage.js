@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import PostsList from '../../features/posts/postsList';
+import { firestore } from '../../lib/firebase';
+import { useUserData } from '../../lib/hooks';
 import NavBar from './NavBar';
 import NewFeed from './NewFeed';
 
@@ -12,6 +12,10 @@ const HomePageContainer = styled.div`
 `;
 
 const HomePage = () => {
+  const {user, username} = useUserData();
+
+  if (!user) return <h1>Loading...</h1>;
+
   return (
     <HomePageContainer>
       <NavBar />
