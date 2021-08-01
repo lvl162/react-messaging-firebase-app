@@ -12,11 +12,12 @@ import {
 } from './NavBarElements';
 import { IoIosHome, IoIosNotifications } from 'react-icons/io';
 import { AiFillMessage } from 'react-icons/ai';
+import { auth } from '../../lib/firebase';
 const NavBar = () => {
   return (
     <NavBarContainer>
       <NavBarWrapper>
-        <LogoContainer>
+        <LogoContainer to='/'>
           <BrandLogo
             src={require('../../images/brandLogo.png').default}
             alt='Logo'
@@ -37,6 +38,7 @@ const NavBar = () => {
               <IoIosNotifications />
             </IconChild>
             <IconChild to='/lvl162'>L</IconChild>
+            <div onClick={() => auth.signOut()}>OUT</div>
           </GroupIconsWrapper>
         </GroupIconsContainer>
       </NavBarWrapper>

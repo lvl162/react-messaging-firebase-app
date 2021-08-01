@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from '../../features/auth/authSlice';
 import { AiTwotoneMail, AiOutlineGithub } from 'react-icons/ai';
@@ -21,6 +21,8 @@ import {
   LoginSubmitButton,
   Subtitle,
 } from './elements';
+import { auth, googleAuthProvider } from '../../lib/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Login = () => {
   // const status = useSelector((state) => state.auth.status);
@@ -29,11 +31,21 @@ const Login = () => {
   // const handleSignIn = () => {
   //   dispatch(signIn());
   // };
-  const handleSignIn = () => {
-    console.log('login goi nek');
+  const [user, loading, error] = useAuthState(auth);
+  const history = useHistory();
+  const handleSignIn = async () => {
+    return await auth.signInWithPopup(googleAuthProvider);
   };
+  if (loading) {
+    return <h1>Loading</h1>;
+  }
+  if (error) {
+    return <h1>Error</h1>;
+  }
+  if (user) {
+    history.push('/');
+  }
   return (
-    // history.push('/message')
     <div>
       <LoginFormContainer>
         <Image src={require('../../images/login.svg').default}></Image>
