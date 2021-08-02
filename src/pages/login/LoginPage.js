@@ -1,7 +1,5 @@
 import React from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { signIn } from '../../features/auth/authSlice';
+import { useHistory } from 'react-router-dom';
 import { AiTwotoneMail, AiOutlineGithub } from 'react-icons/ai';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { FaFacebook } from 'react-icons/fa';
@@ -21,20 +19,20 @@ import {
   LoginSubmitButton,
   Subtitle,
 } from './elements';
-import { auth, googleAuthProvider } from '../../lib/firebase';
+import {
+  auth,
+} from '../../lib/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../features/auth/authSlice';
 
 const Login = () => {
-  // const status = useSelector((state) => state.auth.status);
-  // const user = useSelector((state) => state.auth.user);
-  // const dispatch = useDispatch();
-  // const handleSignIn = () => {
-  //   dispatch(signIn());
-  // };
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
+  const dispatch = useDispatch();
   const handleSignIn = async () => {
-    return await auth.signInWithPopup(googleAuthProvider);
+    // return await auth.signInWithPopup(googleAuthProvider);
+    return dispatch(signIn());
   };
   if (loading) {
     return <h1>Loading</h1>;
@@ -42,13 +40,14 @@ const Login = () => {
   if (error) {
     return <h1>Error</h1>;
   }
-  if (user) {
+  if (!loading && user) {
     history.push('/');
   }
+  const imgSrc = require('../../images/login.svg').default;
   return (
     <div>
       <LoginFormContainer>
-        <Image src={require('../../images/login.svg').default}></Image>
+        <Image src={imgSrc}></Image>
         <LoginForm
           onSubmit={(e) => {
             e.preventDefault();

@@ -17,6 +17,8 @@ import HomePage from './pages/homepage/HomePage';
 import MessagePage from './pages/messages/MessagePage';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
+import PrivateAndParamsRoute from './components/ProtectedRoute';
+import RoutoToMessagePage from './pages/messages/RouteMessagePage';
 
 const App = () => {
   return (
@@ -24,15 +26,23 @@ const App = () => {
       <PersistGate persistor={persistor}>
         <Router>
           <Switch>
-            <Route exact path='/login'>
-              <Login />
-            </Route>
             <PrivateRoute exact path='/'>
               <HomePage />
             </PrivateRoute>
+            <Route exact path='/login'>
+              <Login />
+            </Route>
             <PrivateRoute exact path='/message'>
-              <MessagePage />
+              <RoutoToMessagePage />
             </PrivateRoute>
+            <PrivateRoute exact path='/message/t/'>
+              <RoutoToMessagePage />
+            </PrivateRoute>
+            <PrivateAndParamsRoute
+              exact
+              path='/message/t/:toThisId'
+              children={RoutoToMessagePage}
+            ></PrivateAndParamsRoute>
             <Route path='/404' component={Custom404} />
             <Redirect to='/404' />
           </Switch>

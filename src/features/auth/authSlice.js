@@ -1,15 +1,32 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { auth, googleAuthProvider } from '../../lib/firebase';
-
-// auth.onAuthStateChanged((user) => {
-//   if (user) {
-//     console.log(user.uid);
-//   } else console.log('im out');
-// });
+import {
+  auth,
+  firestore,
+  googleAuthProvider,
+  isDocExist,
+  serverTimestamp,
+} from '../../lib/firebase';
 
 export const signIn = createAsyncThunk('auth/login', async () => {
   const info = await auth.signInWithPopup(googleAuthProvider);
   const { displayName, uid, email, photoURL } = info.user;
+  const userDoc = firestore.collection('users').doc(uid);
+  if (!isDocExist(userDoc)) {
+    const batch = firestore.batch();
+    batch.set(userDoc, {
+      photoURL: photoURL,
+      displayName: displayName,
+      contacts: [],
+      email: email,
+      createdAt: serverTimestamp(),
+    });
+
+    batch
+      .commit()
+      .then((res) => console.log('successfully'))
+      .catch((err) => console.log('error'));
+  }
+  console.log('info already added');
   return { displayName, uid, email, photoURL };
 });
 
@@ -23,6 +40,7 @@ export const authSlice = createSlice({
     user: null,
     status: 'idle',
     error: null,
+    isLoggedIn: null,
   },
   reducers: {},
   extraReducers: {
@@ -33,6 +51,7 @@ export const authSlice = createSlice({
       state.status = 'succeeded';
       // Add any fetched posts to the array
       state.user = action.payload;
+      state.isLoggedIn = true;
     },
     [signIn.rejected]: (state, action) => {
       state.status = 'failed';
@@ -45,6 +64,7 @@ export const authSlice = createSlice({
       state.status = 'succeeded';
       // Add any fetched posts to the array
       state.user = null;
+      state.isLoggedIn = false;
     },
     [signOut.rejected]: (state, action) => {
       state.status = 'failed';

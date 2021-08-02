@@ -1,6 +1,8 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { firestore } from '../../lib/firebase';
+import { auth, firestore } from '../../lib/firebase';
 import { useUserData } from '../../lib/hooks';
 import NavBar from './NavBar';
 import NewFeed from './NewFeed';
@@ -12,13 +14,14 @@ const HomePageContainer = styled.div`
 `;
 
 const HomePage = () => {
-  const {user, username} = useUserData();
-
-  if (!user) return <h1>Loading...</h1>;
-
+  // const [user, loading, error] = useAuthState(auth);
+  const user = useSelector((state) => state.auth.user);
+  // if (loading) return <h1>Loading...</h1>;
+  // if (error) return <h1>Loading...</h1>;
+  // else
   return (
     <HomePageContainer>
-      <NavBar />
+      <NavBar avtUrl={user?.photoURL}/>
       <NewFeed />
     </HomePageContainer>
   );
