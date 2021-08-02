@@ -9,12 +9,15 @@ export const MessagePageContainer = styled.div`
   justify-content: center;
 `;
 
-export const NavBarSection = styled.nav`
+export const NavBarContainer = styled.nav`
   width: 100%;
   height: 50px;
   background-color: white;
   border-bottom: 1px solid #dbdbdb;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 export const MessageSectionWrapper = styled.main`
   /* margin: auto; */
@@ -22,18 +25,20 @@ export const MessageSectionWrapper = styled.main`
   flex-shrink: 0;
   display: flex;
   min-height: 0;
+  min-width: 700px;
+  overflow: auto;
   max-width: 70vw;
-  /* overflow: hidden; */
 `;
 
 // chat list
 export const ChatListContainer = styled.nav`
-  min-width: 25%;
+  min-width: 23%;
   border-right: 1px solid #dbdbdb;
   border-left: 1px solid #dbdbdb;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex: 0 1 0;
 `;
 
 export const ChatListHeader = styled.header`
@@ -57,6 +62,7 @@ export const ChatListSearchBarWrapper = styled.input`
   font-weight: 510;
 `;
 export const ListContactsContainer = styled.div`
+  display: flex;
   width: 100%;
   flex: 1;
   max-height: 80vh;
@@ -69,19 +75,22 @@ export const ListContactsWrapper = styled.div`
 
 export const ContactItemContainer = styled.div`
   width: 100%;
-  height: 100px;
+  height: 70px;
   border-bottom: 1px solid black;
   &:hover {
     background: gray;
   }
+  display: flex;
+  align-items: center;
 `;
 export const ContactItemWrapper = styled(Link)`
-  padding: 20px;
+  flex: 1;
+  padding: 0px 2px;
   user-select: none;
   text-decoration: none;
   color: inherit;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-content: flex-start;
 `;
 
@@ -91,18 +100,37 @@ export const UserAvt = styled.div`
   /* border: 1px solid; */
   width: 50px;
   height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const NameAndLastMessage = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 export const UserName = styled.div`
   font-size: 1em;
   font-weight: 300;
 `;
+
+export const HistoryLastMessage = styled.span`
+  white-space: nowrap;
+
+  font-size: 0.9em;
+  font-weight: 200;
+`;
 // ib part
 export const InboxContainer = styled.div`
   flex: 1 0 75%;
   max-width: 75vw;
+  width: 75vw;
   background-color: gray;
   display: flex;
   height: 100%;
+  min-width: 550px;
+  overflow: auto;
 `;
 export const InboxWrapper = styled.div`
   display: flex;
@@ -112,32 +140,64 @@ export const InboxWrapper = styled.div`
   height: 100%;
   min-height: 0;
   width: 100%;
-
   /* overflow-y: hidden; */
 `;
 
 // header: avt, name, ...
 export const InboxHeaderContainer = styled.header`
-  width: 100%;
+  min-width: 100%;
   border-bottom: 1px solid #dbdbdb;
+  border-right: 1px solid #dbdbdb;
   background-color: white;
   flex: 1 0 50px;
 `;
 export const InboxHeaderWrapper = styled.div`
   height: 100%;
   width: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+export const InboxHeaderAvt = styled.div`
+  margin: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
+`;
+export const InboxHeaderNameAndStatus = styled.div`
+  margin-right: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const InboxHeaderName = styled.h5`
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+`;
+export const InboxHeaderStatus = styled.p`
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
 `;
 
 // inbox body part
 
 export const InboxBodyContainer = styled.div`
+  display: flex;
   background-color: white;
   border-bottom: 1px solid #dbdbdb;
+  border-right: 1px solid #dbdbdb;
   width: 100%;
   flex: 1 0 0px;
-  height: 80vh;
+  min-height: 80vh;
+  padding-bottom: 7px;
 `;
 export const InboxBodyWrapper = styled.div`
+  flex: 1;
   display: flex;
   max-width: 100%;
   max-height: 100%;
@@ -156,6 +216,7 @@ export const MessageItemWrapper = styled.div`
   margin: 0.0625rem;
   max-width: 45%;
   overflow-wrap: break-word;
+  max-width: 300px;
 `;
 
 export const MyMessageItemsContainer = styled.div`
@@ -168,7 +229,6 @@ export const MyMessageItem = styled(MessageItemWrapper)`
   align-self: flex-end;
   background-color: #efefef;
   margin-right: 0.5rem;
-  max-width: 100%;
 `;
 export const MyMessageItemFirst = styled(MyMessageItem)`
   border-bottom-right-radius: 0.1em;
@@ -184,20 +244,27 @@ export const MyMessageItemMiddle = styled(MyMessageItem)`
 export const YourMessageItemsContainer = styled.div`
   display: flex;
   gap: 6px;
+  min-width: 200px;
+  /* flex-direction: column; */
 `;
 
 export const YourMessageAvt = styled.div`
   max-width: 60px;
   align-self: flex-end;
-  border-radius: 50%;
-  border: solid 1px #dbdbdb;
+  padding-bottom: 5px;
+  /* border-radius: 50%;
+  border: solid 1px #dbdbdb; */
 `;
 
 export const YourMessageItemsWrapper = styled.div`
-  flex: 1 0 0%;
+  flex: 1 1 0%;
   display: flex;
   flex-direction: column;
-  flex-flow: column wrap;
+  width: 100%;
+  /* flex-flow: column wrap; */
+`;
+export const YourNameTag = styled.div`
+  font-size: 0.9rem;
 `;
 
 export const YourMessageItem = styled(MessageItemWrapper)`
@@ -225,13 +292,14 @@ export const YourMessageItemMiddle = styled(YourMessageItem)`
 export const SendMessageContainer = styled.div`
   flex: 2;
   max-height: 30vh;
-  width: 100%;
+  min-width: 100%;
   background-color: white;
   display: flex;
   height: auto;
   justify-content: center;
   background: white;
   max-width: 75vw;
+  border-right: 1px solid #dbdbdb;
 `;
 export const SendMessageWrapper = styled.div`
   width: 100%;
