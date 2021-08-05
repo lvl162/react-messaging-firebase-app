@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/react-messaging-firebase-app/static/css/main.b75bd942.chunk.css",
-    "main.js": "/react-messaging-firebase-app/static/js/main.6f823dee.chunk.js",
-    "main.js.map": "/react-messaging-firebase-app/static/js/main.6f823dee.chunk.js.map",
+    "main.js": "/react-messaging-firebase-app/static/js/main.50be716c.chunk.js",
+    "main.js.map": "/react-messaging-firebase-app/static/js/main.50be716c.chunk.js.map",
     "runtime-main.js": "/react-messaging-firebase-app/static/js/runtime-main.3d80b7ad.js",
     "runtime-main.js.map": "/react-messaging-firebase-app/static/js/runtime-main.3d80b7ad.js.map",
-    "static/js/2.f5313214.chunk.js": "/react-messaging-firebase-app/static/js/2.f5313214.chunk.js",
-    "static/js/2.f5313214.chunk.js.map": "/react-messaging-firebase-app/static/js/2.f5313214.chunk.js.map",
+    "static/js/2.633d8486.chunk.js": "/react-messaging-firebase-app/static/js/2.633d8486.chunk.js",
+    "static/js/2.633d8486.chunk.js.map": "/react-messaging-firebase-app/static/js/2.633d8486.chunk.js.map",
     "index.html": "/react-messaging-firebase-app/index.html",
     "static/css/main.b75bd942.chunk.css.map": "/react-messaging-firebase-app/static/css/main.b75bd942.chunk.css.map",
-    "static/js/2.f5313214.chunk.js.LICENSE.txt": "/react-messaging-firebase-app/static/js/2.f5313214.chunk.js.LICENSE.txt",
+    "static/js/2.633d8486.chunk.js.LICENSE.txt": "/react-messaging-firebase-app/static/js/2.633d8486.chunk.js.LICENSE.txt",
     "static/media/login.svg": "/react-messaging-firebase-app/static/media/login.8cc1ab77.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.3d80b7ad.js",
-    "static/js/2.f5313214.chunk.js",
+    "static/js/2.633d8486.chunk.js",
     "static/css/main.b75bd942.chunk.css",
-    "static/js/main.6f823dee.chunk.js"
+    "static/js/main.50be716c.chunk.js"
   ]
 }
