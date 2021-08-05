@@ -2,8 +2,8 @@ import React from 'react';
 import { NavBarContainer } from './elements';
 
 import styled from 'styled-components';
-import NavBar from '../homepage/NavBar.js';
 import { Link } from 'react-router-dom';
+import { ALOIDAIKLogo } from '../homepage/NavBarElements';
 
 const NavBarWrapper = styled.div`
   margin: auto;
@@ -31,11 +31,19 @@ export const BrandLogo = styled.img`
   width: 160px;
 `;
 
+export const MsgLogo = styled(ALOIDAIKLogo)`
+  text-align: left;
+  font-size: 2rem;
+`;
+
 const NavBarSection = () => {
   return (
     <NavBarContainer>
       <NavBarWrapper>
-        <LogoContainer to='/'> HOME</LogoContainer>
+        <LogoContainer to='/'>
+          
+          <MsgLogo>ALOIDAIK</MsgLogo>
+        </LogoContainer>
       </NavBarWrapper>
     </NavBarContainer>
   );

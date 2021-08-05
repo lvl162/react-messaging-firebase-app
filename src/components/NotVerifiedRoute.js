@@ -1,31 +1,38 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import Loading from './Loading';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Redirect, Route } from 'react-router-dom';
 import { auth } from '../lib/firebase';
+import Loading from './Loading';
 
-function PrivateAndParamsRoute({ children: Component, ...rest }) {
+const NotVerifiedRoute = ({ children, ...rest }) => {
   const [user, loading, error] = useAuthState(auth);
+
   return (
     <Route
       {...rest}
-      render={({ location, ...routeProps }) =>
+      render={({ location }) =>
         loading ? (
           <Loading />
         ) : !user || error ? (
-          // <GoogleButton/> button can be used instead
           <Redirect
             to={{
               pathname: '/login',
               state: { from: location },
             }}
           />
+        ) : user.emailVerified ? (
+          <Redirect
+            to={{
+              pathname: '/',
+              state: { from: location },
+            }}
+          />
         ) : (
-          <Component {...routeProps} />
+          children
         )
       }
     />
   );
-}
+};
 
-export default PrivateAndParamsRoute;
+export default NotVerifiedRoute;

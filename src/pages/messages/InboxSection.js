@@ -3,7 +3,6 @@ import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { IoMdPhotos } from 'react-icons/io';
 import { GiFallingStar } from 'react-icons/gi';
 import {
-  ChatListContainer,
   GroupButtonsOfOptions,
   InboxBodyContainer,
   InboxBodyWrapper,
@@ -11,9 +10,6 @@ import {
   InboxHeaderContainer,
   InboxHeaderWrapper,
   InboxWrapper,
-  MessageItemWrapper,
-  MessagePageContainer,
-  MessageSectionWrapper,
   MyMessageItem,
   MyMessageItemFirst,
   MyMessageItemLast,
@@ -39,14 +35,13 @@ import {
   InboxHeaderStatus,
   YourNameTag,
 } from './elements';
-import Avatar from 'react-avatar';
 import { firestore, serverTimestamp } from '../../lib/firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import { useRef } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
+import Avatar from '../../components/Avatar';
 
 const transformMessages = (ms) => {
   const messages = ms.slice(0).reverse();
@@ -147,7 +142,7 @@ const renderSequenceChat = (myId, photo, yourName, chats) => {
     return (
       <YourMessageItemsContainer key={nanoid()}>
         <YourMessageAvt key={nanoid()}>
-          <Avatar src={photo} size='20' />
+          <Avatar src={photo} size='28' />
         </YourMessageAvt>
         <YourMessageItemsWrapper key={nanoid()}>
           <YourNameTag key={nanoid()}>{yourName}</YourNameTag>
@@ -233,7 +228,7 @@ const InboxSection = ({ me, you, messagesInit }) => {
     .collection(`chats/${chatRoomId}/messages`)
     .orderBy('createdAt', 'desc')
     .limit(1);
-  const [lastMessage, loading, error] = useCollection(lastMessageRef);
+  const [lastMessage, loading] = useCollection(lastMessageRef);
 
   const [messages, setMessages] = useState(messagesInit);
   const last = lastMessage && lastMessage.docs.map((doc) => docToJson(doc))[0];
@@ -244,7 +239,6 @@ const InboxSection = ({ me, you, messagesInit }) => {
           const lastMsgState = messages[messages.length - 1];
 
           if (last.createdAt !== lastMsgState.createdAt) {
-            console.log('called');
             setMessages(messages.concat(last));
           }
         } else {
@@ -252,13 +246,14 @@ const InboxSection = ({ me, you, messagesInit }) => {
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [last]);
 
   let inputRef = null;
 
   const handleSubmit = () => {
     const msg = inputRef.textContent;
-    if (msg !== '') {
+    if (msg.trim() !== '') {
       const message = {
         from: myId,
         content: msg + '',
@@ -291,11 +286,7 @@ const InboxSection = ({ me, you, messagesInit }) => {
         <InboxHeaderContainer>
           <InboxHeaderWrapper>
             <InboxHeaderAvt>
-              <Avatar
-                size='35'
-                facebook-id='invalidfacebookusername'
-                src={photoURL}
-              />
+              <Avatar size='35' src={photoURL} padding='1' />
             </InboxHeaderAvt>
 
             <InboxHeaderNameAndStatus>
@@ -343,16 +334,15 @@ const InboxSection = ({ me, you, messagesInit }) => {
               }}
             >
               <SendMessageInput
+                data-ph='Send a message...'
                 contentEditable={true}
                 ref={(node) => (inputRef = node)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
-                    console.log('nah ok');
                     handleSubmit();
                   }
                   if (e.key === 'Enter' && e.shiftKey) {
-                    console.log('ok');
                   }
                 }}
               ></SendMessageInput>

@@ -7,9 +7,8 @@ import {
   serverTimestamp,
 } from '../../lib/firebase';
 
-export const signIn = createAsyncThunk('auth/login', async () => {
-  const info = await auth.signInWithPopup(googleAuthProvider);
-  const { displayName, uid, email, photoURL } = info.user;
+export const signIn = createAsyncThunk('auth/login', async (user) => {
+  const { displayName, uid, email, photoURL } = user;
   const userDoc = firestore.collection('users').doc(uid);
   if (!isDocExist(userDoc)) {
     const batch = firestore.batch();

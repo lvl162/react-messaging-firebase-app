@@ -39,6 +39,7 @@ export const ChatListContainer = styled.nav`
   flex-direction: column;
   align-items: flex-start;
   flex: 0 1 0;
+  background-color: #fff;
 `;
 
 export const ChatListHeader = styled.header`
@@ -47,6 +48,7 @@ export const ChatListHeader = styled.header`
   max-height: 10vh;
 `;
 export const ChatListHeaderWrapper = styled.header`
+  text-align: center;
   padding: 10px;
   font-size: 1.5em;
   font-weight: 510;
@@ -63,6 +65,7 @@ export const ChatListSearchBarWrapper = styled.input`
 `;
 export const ListContactsContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
   flex: 1;
   max-height: 80vh;
@@ -76,7 +79,7 @@ export const ListContactsWrapper = styled.div`
 export const ContactItemContainer = styled.div`
   width: 100%;
   height: 70px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #dbdbdb;
   &:hover {
     background: gray;
   }
@@ -112,14 +115,14 @@ export const NameAndLastMessage = styled.div`
 `;
 export const UserName = styled.div`
   font-size: 1em;
-  font-weight: 300;
+  font-weight: 500;
 `;
 
 export const HistoryLastMessage = styled.span`
   white-space: nowrap;
 
   font-size: 0.9em;
-  font-weight: 200;
+  font-weight: 400;
 `;
 // ib part
 export const InboxContainer = styled.div`
@@ -131,6 +134,7 @@ export const InboxContainer = styled.div`
   height: 100%;
   min-width: 550px;
   overflow: auto;
+  background: #fff;
 `;
 export const InboxWrapper = styled.div`
   display: flex;
@@ -251,7 +255,6 @@ export const YourMessageItemsContainer = styled.div`
 export const YourMessageAvt = styled.div`
   max-width: 60px;
   align-self: flex-end;
-  padding-bottom: 5px;
   /* border-radius: 50%;
   border: solid 1px #dbdbdb; */
 `;
@@ -264,7 +267,10 @@ export const YourMessageItemsWrapper = styled.div`
   /* flex-flow: column wrap; */
 `;
 export const YourNameTag = styled.div`
+  padding-left: 3.5px;
   font-size: 0.9rem;
+  color: gray;
+  font-style: bold;
 `;
 
 export const YourMessageItem = styled(MessageItemWrapper)`
@@ -330,6 +336,8 @@ export const SendMessageForm = styled.form`
   display: flex;
 `;
 export const SendMessageInput = styled.div`
+  display: flex;
+  align-items: center;
   padding: 5px 12px;
   &:focus {
     outline: none;
@@ -347,6 +355,12 @@ export const SendMessageInput = styled.div`
   line-height: 1.1;
   white-space: pre-wrap;
   direction: ltr;
+  &:empty:not(:focus):before {
+    font-size: 1rem;
+    content: attr(data-ph);
+    color: grey;
+    font-style: bold;
+  }
 `;
 
 export const SendMessageSubmitWrapper = styled.div`

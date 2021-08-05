@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
 export const gradientBackground = keyframes` {
@@ -56,7 +57,7 @@ export const LoginForm = styled.form`
   min-height: 400px;
   background-color: #ffffff;
   justify-content: space-evenly;
-  gap: 20px;
+  gap: 15px;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
   &:hover {
     box-shadow: 0 1px 15px rgba(0, 0, 0, 0.5);
@@ -102,6 +103,8 @@ export const ButtonsContainer = styled.div`
   align-items: center;
 `;
 export const LoginSubmitButton = styled.button`
+  text-decoration: none;
+  color: inherit;
   background-color: pink;
   padding: 10px 15px;
   border-radius: 10%;
@@ -125,7 +128,34 @@ export const LoginSubmitButton = styled.button`
     background-position: right center;
   }
 `;
-export const ForgotPasswordLink = styled.a`
+export const SignUpButton = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+  background-color: pink;
+  padding: 10px 15px;
+  border-radius: 10%;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-style: bold;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  background-image: linear-gradient(
+    to right,
+    #895cf2 0%,
+    #ffabf4 50%,
+    #895cf2 100%
+  );
+  transition: 1s;
+  &:hover {
+    background-position: right center;
+  }
+`;
+export const ForgotPasswordLink = styled(Link)`
+  color: inherit;
   text-decoration: none;
   font-weight: 250;
   &:hover {
@@ -133,6 +163,7 @@ export const ForgotPasswordLink = styled.a`
     font-weight: 500;
     color: red;
   }
+  text-align: center;
 `;
 export const Heading = styled.h4`
   user-select: none;
@@ -162,10 +193,11 @@ export const FormFieldsContainer = styled.div`
   margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 25px;
 `;
 export const SocialLinksContainer = styled.ul`
   flex-grow: 1;
+  min-height: 40px;
   display: flex;
   align-items: space-around;
   justify-content: center;

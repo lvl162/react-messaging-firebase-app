@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link as LinkS } from 'react-scroll';
 import { animateScroll as scroll } from 'react-scroll';
 
 import {
-  BrandLogo,
+  ALOIDAIKLogo,
   GroupIconsContainer,
   GroupIconsWrapper,
   IconChild,
@@ -18,19 +17,21 @@ import { AiFillMessage } from 'react-icons/ai';
 // import { auth } from '../../lib/firebase';
 import { signOut } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
-import Avatar from 'react-avatar';
-const NavBar = ({ avtUrl }) => {
+import Avatar from '../../components/Avatar';
+const mockSrc = require('../../images/hacker.png').default;
+const NavBar = ({ me }) => {
+  const { uid } = me;
+  const photoURL = me.photoURL || mockSrc;
   const toggleHome = () => {
     scroll.scrollToTop();
   };
-  console.log(avtUrl);
   const dispatch = useDispatch();
-  const logoSrc = require('../../images/brandLogo.png').default;
   return (
     <NavBarContainer>
       <NavBarWrapper>
-        <LogoContainer to='/'>
-          <BrandLogo src={logoSrc} alt='Logo' />
+        <LogoContainer onClick={toggleHome}>
+          {/* <BrandLogo src={logoSrc} alt='Logo' /> */}
+          <ALOIDAIKLogo>ALOIDAIK</ALOIDAIKLogo>
         </LogoContainer>
         <SearchBar>
           <SearchInput placeholder='Tìm kiếm'></SearchInput>
@@ -46,12 +47,8 @@ const NavBar = ({ avtUrl }) => {
             <IconChild to='/notifications'>
               <IoIosNotifications />
             </IconChild>
-            <IconChild to='/lvl162'>
-              <Avatar
-                size='25'
-                facebook-id='invalidfacebookusername'
-                src={avtUrl}
-              />
+            <IconChild to={`/user/${uid}`}>
+              <Avatar size='30' src={photoURL} padding='1' />
             </IconChild>
             {/* <div onClick={() => auth.signOut()}>OUT</div> */}
             <IconChild to='/' onClick={() => dispatch(signOut())}>

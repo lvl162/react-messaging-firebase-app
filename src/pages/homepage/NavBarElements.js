@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Heading } from '../auth/elements';
 
 export const NavBarContainer = styled.nav`
   margin-top: -54px;
@@ -26,20 +27,29 @@ export const NavBarWrapper = styled.div`
   justify-content: center;
   z-index: 999;
 `;
-export const LogoContainer = styled(Link)`
-  cursor: inherit;
+export const LogoContainer = styled.div`
+  cursor: pointer;
   flex: 1 1 0%;
   min-width: 40px;
   display: flex;
   align-items: flex-start;
-  justify-content: baseline;
+  text-decoration: none;
+  color: inherit;
+  user-select: none;
 `;
 export const BrandLogo = styled.img`
   cursor: pointer;
   height: 50%;
   width: 160px;
 `;
-
+export const ALOIDAIKLogo = styled(Heading)`
+  flex: 1;
+  font-size: 2.5rem;
+  padding: none;
+  border: none;
+  text-align: left;
+  /* vertical-align: middle; */
+`;
 export const SearchBar = styled.div`
   flex: 0 1 auto;
   align-items: center;
@@ -72,4 +82,6 @@ export const IconChild = styled(Link)`
   user-select: none;
   text-decoration: none;
   color: inherit;
+  display: flex;
+  align-items: center;
 `;

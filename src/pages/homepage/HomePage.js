@@ -1,29 +1,28 @@
 import React from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import { auth, firestore } from '../../lib/firebase';
-import { useUserData } from '../../lib/hooks';
+// import { useAuthState } from 'react-firebase-hooks/auth';
+// import { useSelector } from 'react-redux';
+import Loading from '../../components/Loading';
+// import { auth } from '../../lib/firebase';
 import NavBar from './NavBar';
 import NewFeed from './NewFeed';
 
-const HomePageContainer = styled.div`
-  width: 100%;
-  height: 500vh;
-  background: white;
-`;
-
-const HomePage = () => {
-  // const [user, loading, error] = useAuthState(auth);
-  const user = useSelector((state) => state.auth.user);
-  // if (loading) return <h1>Loading...</h1>;
-  // if (error) return <h1>Loading...</h1>;
+const HomePage = ({ user }) => {
+  // const me = useSelector((state) => state.auth.user);
+  // if (loading) return <Loading />;
+  if (!user) return <Loading />;
   // else
+
+  const me = {
+    uid: user.uid,
+    displayName: user.displayName,
+    photoURL: user.photoURL,
+    email: user.email,
+  };
   return (
-    <HomePageContainer>
-      <NavBar avtUrl={user?.photoURL}/>
-      <NewFeed />
-    </HomePageContainer>
+    <div>
+      <NavBar me={me} />
+      <NewFeed me={me} />
+    </div>
   );
 };
 

@@ -42,11 +42,22 @@ export const docToJson = (doc) => {
   };
 };
 
-export const isDocExist = (docRef) => {
-  docRef
-    .get()
-    .then((doc) => doc.exists)
-    .catch((error) => {
-      return false;
-    });
+export const isDocExist = async (docRef) => {
+  const doc = await docRef.get();
+  return doc.exists;
 };
+
+export function sendVerificationEmail() {
+  var user = auth.currentUser;
+
+  user
+    .sendEmailVerification()
+    .then(function () {
+      window.alert(
+        'Verification link sent to your email. Kinldy check to verify your account'
+      );
+    })
+    .catch(function (error) {
+      // An error happened.
+    });
+}

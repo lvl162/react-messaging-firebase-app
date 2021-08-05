@@ -4,15 +4,16 @@ import Loading from './Loading';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../lib/firebase';
 
-function PrivateRoute({ children, ...rest }) {
+function PrivateAndParamsRoute({ children: Component, ...rest }) {
   const [user, loading, error] = useAuthState(auth);
   return (
     <Route
       {...rest}
-      render={({ location }) =>
+      render={({ location, ...routeProps }) =>
         loading ? (
           <Loading />
         ) : !user || error ? (
+          // <GoogleButton/> button can be used instead
           <Redirect
             to={{
               pathname: '/login',
@@ -20,7 +21,7 @@ function PrivateRoute({ children, ...rest }) {
             }}
           />
         ) : user.emailVerified ? (
-          children
+          <Component { ...routeProps } user={user} />
         ) : (
           <Redirect
             to={{
@@ -34,4 +35,4 @@ function PrivateRoute({ children, ...rest }) {
   );
 }
 
-export default PrivateRoute;
+export default PrivateAndParamsRoute;

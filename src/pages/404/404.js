@@ -15,7 +15,7 @@ export default function Custom404() {
             allowFullScreen
           ></iframe>
           <Link to='/'>
-            <button className='btn btn-primary'>Go home</button>
+            <button>Go home</button>
           </Link>
         </div>
       </div>
