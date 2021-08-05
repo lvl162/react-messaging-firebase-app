@@ -20,12 +20,7 @@ import {
   LoginSubmitButton,
   Subtitle,
 } from './elements';
-import {
-  auth,
-  firestore,
-  googleAuthProvider,
-  serverTimestamp,
-} from '../../lib/firebase';
+import { auth, googleAuthProvider } from '../../lib/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../../features/auth/authSlice';
@@ -83,7 +78,7 @@ const SignUp = () => {
           })
           .then(() => {})
           .catch((error) => {});
-        dispatch(signIn({ ...user, name: name, photoURL: photoUrl }));
+        dispatch(signIn({ ...user, displayName: name, photoURL: photoUrl }));
         user
           .sendEmailVerification()
           .then(function () {
@@ -92,14 +87,10 @@ const SignUp = () => {
             );
           })
           .catch(function (error) {
-            // An error happened.
+            console.log(error);
           });
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+      .catch((error) => {});
   };
   return (
     <div>

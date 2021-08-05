@@ -18,10 +18,9 @@ import { AiFillMessage } from 'react-icons/ai';
 import { signOut } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 import Avatar from '../../components/Avatar';
-const mockSrc = require('../../images/hacker.png').default;
 const NavBar = ({ me }) => {
   const { uid } = me;
-  const photoURL = me.photoURL || mockSrc;
+  const photoURL = me.photoURL;
   const toggleHome = () => {
     scroll.scrollToTop();
   };

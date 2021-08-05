@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Loading from '../../components/Loading';
-import { auth } from '../../lib/firebase';
 import ChatHistory from './ChatHistorySection';
 import {
   InboxContainer,

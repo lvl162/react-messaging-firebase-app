@@ -23,7 +23,6 @@ import {
   increment,
   serverTimestamp,
 } from '../../lib/firebase';
-import { useSelector } from 'react-redux';
 import { useDocument } from 'react-firebase-hooks/firestore';
 import Avatar from '../../components/Avatar';
 import styled from 'styled-components';

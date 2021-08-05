@@ -4,7 +4,6 @@ import {
   useDocumentDataOnce,
 } from 'react-firebase-hooks/firestore';
 import { useSelector } from 'react-redux';
-import Loading from '../../components/Loading';
 import { docToJson, firestore } from '../../lib/firebase';
 import { InboxContainer, InboxWrapper } from './elements';
 import InboxSection from './InboxSection';

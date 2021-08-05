@@ -23,7 +23,8 @@ const ProfilePage = ({ match }) => {
       <PostList
         postsRef={firestore
           .collection(`users/${uid}/posts`)
-          .where('public', '==', true)}
+          .where('public', '==', true)
+          .orderBy('createdAt', 'desc')}
       />
     </NewFeedContainer>
   );

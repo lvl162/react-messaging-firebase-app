@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { firestore, fromMillis } from '../../lib/firebase';
+import { fromMillis } from '../../lib/firebase';
 import {
   PostsListContainer,
   PostEndMessage,
@@ -21,7 +21,7 @@ const PostList = ({ postsRef }) => {
       setLoading(false);
     };
     fetchPosts();
-  }, []);
+  }, [postsRef]);
   const getMorePosts = async () => {
     setLoading(true);
     const last = posts[posts.length - 1].data();
@@ -30,7 +30,7 @@ const PostList = ({ postsRef }) => {
         ? fromMillis(last.createdAt)
         : last.createdAt;
 
-    const query = postsRef.limit(LIMIT);
+    const query = postsRef.startAfter(cursor).limit(LIMIT);
 
     const newPosts = (await query.get()).docs;
 

@@ -25,7 +25,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../../features/auth/authSlice';
 import Loading from '../../components/Loading';
-const imgSrc = require('../../images/login.svg').default;
+// const imgSrc = require('../../images/login.svg').default;
+import imgSrc from '../../images/login.svg';
 
 const Login = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -33,7 +34,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const handleSignInWithGoogle = async () => {
     await auth.signInWithPopup(googleAuthProvider);
-    dispatch(signIn(auth.currentUser));
+    dispatch(signIn());
   };
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

@@ -19,7 +19,6 @@ import PostItem from './PostItem';
 import { timeSince } from '../../lib/helper';
 import { PostsListContainer } from './PostElements';
 import toast from 'react-hot-toast';
-const mockSrc = require('../../images/hacker.png').default;
 
 const NewPost = ({ me }) => {
   const handlePost = () => {
@@ -65,7 +64,7 @@ const NewPost = ({ me }) => {
         <NewPostWrapper>
           <NewPostHeaderContainer>
             <NewPostHeaderWrapper>
-              <Avatar src={photoURL || mockSrc} size={35} padding={1}></Avatar>
+              <Avatar src={photoURL} size={35} padding={1}></Avatar>
               <NewPostHeaderNameAndPublic>
                 <NewPostHeaderName>{displayName}</NewPostHeaderName>
                 <NewPostHeaderPublicOrNot>Public</NewPostHeaderPublicOrNot>

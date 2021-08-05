@@ -2,15 +2,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   auth,
   firestore,
-  googleAuthProvider,
   isDocExist,
   serverTimestamp,
 } from '../../lib/firebase';
-
-export const signIn = createAsyncThunk('auth/login', async (user) => {
-  const { displayName, uid, email, photoURL } = user;
+const addInfo = async (displayName, uid, email, photoURL) => {
   const userDoc = firestore.collection('users').doc(uid);
-  if (!isDocExist(userDoc)) {
+  const doc = await userDoc.get();
+  if (!doc.exists) {
     const batch = firestore.batch();
     batch.set(userDoc, {
       photoURL: photoURL,
@@ -24,8 +22,14 @@ export const signIn = createAsyncThunk('auth/login', async (user) => {
       .commit()
       .then((res) => console.log('successfully'))
       .catch((err) => console.log('error'));
+  } else {
+    console.log('already add');
   }
-  console.log('info already added');
+};
+export const signIn = createAsyncThunk('auth/login', async (user) => {
+  console.log(user, 'abc');
+  const { displayName, uid, email, photoURL } = user;
+  await addInfo(displayName, uid, email, photoURL);
   return { displayName, uid, email, photoURL };
 });
 
