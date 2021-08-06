@@ -18,8 +18,8 @@ The UI is created by `styled-components` with css only, a little `Redux Persist`
 ## Profile
 - Have avatar and all the post
 # How to run
-first install all the dependencies
+- first install all the dependencies
 ``` npm install ```
-and ``` npm start ``` to check at `localhost:3000`
+- then ``` npm start ``` and check all results at `localhost:3000` 
 # Demo
 Check [**live demo**](https://lvl162.github.io/react-messaging-firebase-app)
