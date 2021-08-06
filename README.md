@@ -5,7 +5,7 @@ The UI was created by `styled-components` with css only, a little `Redux Persist
 # Firestore Model
 - users -> doc(user id) -> posts, audit, user-info
 - messages -> chat(uidA__uidB) -> messages, chatroom info, last-message
-# Feature
+# Features
 ### 1. Auth
 - Login using Google
 - Sign up with your email, and need to verify email after sign up to activate account.
