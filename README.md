@@ -1,6 +1,6 @@
 # Introduction
 A social media platform with some basic features such as Messaging, Posting, Sign In, Sign Up, Profile, Shoot a like to post...
-The project base on React and serverless base on Firebase (Firestore, Firebase Auth).
+The project did base on React and serverless base on Firebase (Firestore, Firebase Auth).
 The UI is created by `styled-components` with css only, a little `Redux Persist` on store `auth state` and mainly using `react-firebase-hooks` on consuming the Firestore and Firebase auth.
  # Firestore Model
 - users -> doc(user id) -> posts, audit, userinfo
