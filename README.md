@@ -38,7 +38,7 @@ git push origin -u main // or using pull requset
   "predeploy": "npm run build",
   "deploy": "gh-pages -d build"
 ```
-### 3. Add `hompage` url to `package.json`
+### 3. Add `homepage` url to `package.json`
 ```
 "homepage": "http://[github_username].github.io/[respository_name]"
 ```
