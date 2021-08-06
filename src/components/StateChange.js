@@ -17,7 +17,7 @@ const StateChange = () => {
     return () => {
       clean();
     };
-  }, []);
+  }, [dispatch]);
   return <></>;
 };
 
