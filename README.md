@@ -23,3 +23,25 @@ The UI was created by `styled-components` with css only, a little `Redux Persist
 - then ``` npm start ``` and check all results at `localhost:3000` 
 # Demo
 Check [**live demo**](https://lvl162.github.io/react-messaging-firebase-app)
+
+# Deploy 
+### 1. Add gh-pages
+```npm i -D gh-pages```
+### 2. Commit changes to `main` branch
+```
+git add .
+git commit -m "its a message"
+git push origin -u main // or using pull requset
+```
+### 2. Add `run scripts` to `package.json/scripts`
+```
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
+```
+### 3. Add `hompage` url to `package.json`
+```
+"homepage": "http://[github_username].github.io/[respository_name]"
+```
+example: ```"homepage": "http://lvl162.github.io/react-messaging-firebase-app"```
+### 4. Deploy
+```npm run deploy```
